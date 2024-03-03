@@ -1,8 +1,9 @@
 name: my-cicd-workflow example
-on: push
+on:
+  push:
+    branches: [ "main" ]
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World! from GitHub Actions!!!"
+    - uses: actions/checkout@v3
