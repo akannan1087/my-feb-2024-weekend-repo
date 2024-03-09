@@ -4,6 +4,6 @@
 <title>Some relevant title</title>
 </head>
 <body>
-<h2>We are implementing CICD using Jenkins!!!</h2>
+<h2>We are implementing CICD using Jenkins - We are integrating workflow in our pipeline!!!</h2>
 </body>
 </html>
