@@ -8,12 +8,6 @@ pipeline {
 
     //CI build starts here..
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'b5e6c704-c9de-4b69-a385-e68b72c91a80', url: 'https://github.com/akannan1087/my-feb-2024-weekend-repo'
-            }
-        }
-        
         stage ("Build") {
             steps {
                 sh "mvn clean install -f MyWebApp/pom.xml"
