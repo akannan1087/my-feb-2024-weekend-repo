@@ -4,7 +4,7 @@ pipeline {
     tools 
     {
          maven 'Maven3'
-    }
+    
 
     //CI build starts here..
     stages {
