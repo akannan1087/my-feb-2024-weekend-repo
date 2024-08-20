@@ -1,9 +1,11 @@
 name: cicd-workflow with slack integration
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
+  workflow_dispatch:
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
