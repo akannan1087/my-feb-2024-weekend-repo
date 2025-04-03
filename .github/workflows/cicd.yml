@@ -1,4 +1,4 @@
-name: cicd-workflow with slack integration
+name: cicd-workflow with Tomcat integration
 on:
   push:
     branches:
@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -18,9 +16,8 @@ jobs:
         java-version: '11'
     - name: Build with Maven
       run: mvn install -f MyWebApp/pom.xml
-    - uses: act10ns/slack@v2
-      with:
-        channel: '#mar-2024-weekday-batch'
-        status: ${{ job.status }}
-        steps: ${{ toJson(steps) }}
-      if: always()
+    - name: Deploy to Tomcat
+      run: |
+        curl -v -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} \
+        -T MyWebApp/target/MyWebApp.war \
+        "http://${{ secrets.TOMCAT_HOST }}/manager/text/deploy?path=/MyWebApp&update=true"
