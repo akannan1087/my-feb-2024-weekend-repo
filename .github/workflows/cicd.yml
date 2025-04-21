@@ -16,8 +16,8 @@ jobs:
         java-version: '11'
     - name: Build with Maven
       run: mvn install -f MyWebApp/pom.xml
-    - name: Deploy to Tomcat
-      run: |
-        curl -v -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} \
-        -T MyWebApp/target/MyWebApp.war \
-        "http://${{ secrets.TOMCAT_HOST }}/manager/text/deploy?path=/MyWebApp&update=true"
+    - name: Upload JaCoCo Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: jacoco-report
+        path: target/site/jacoco/
